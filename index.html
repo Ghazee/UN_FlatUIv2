@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="css/jquery.mobile.flatui.css" />
+  <script src="js/jquery.min.js"></script>
+  <script src="js/jquery.mobile-1.3.1.min.js"></script>
+</head>
+<body>
+	
+<!-- HALAMAN CARI START -->	
+	 <div data-role="page" id="page_cari">
+         <div data-role="header" data-position="fixed" data-theme="b">
+            <h1>CARI HASIL UN</h1>
+         </div>
+         <div data-role="content">
+            <div class="div-widget" id="div_page_cari">
+               <form id="form_cari">
+                  <div data-role="fieldcontain">
+                     <label for="no_ujian">No Ujian</label>
+                     <input type="text" id="no_ujian" name="no_ujian" placeholder="masukan nomer ujian" value="010010018">
+                  </div>
+                  <span>Tanggal lahir</span>
+                  <div class="ui-grid-a">
+                     <div class="ui-block-a">
+                        <select data-native-menu="false" id="tgl_lhr" name="tgl_lhr" data-mini="true">
+                           <option value="0">Tanggal</option>
+                           <option value="01" selected="selected">01</option>
+                           <option value="02">02</option>
+                           <option value="03">03</option>
+                           <option value="04">04</option>
+                           <option value="05">05</option>
+                           <option value="06">06</option>
+                           <option value="07">07</option>
+                           <option value="08">08</option>
+                           <option value="09">09</option>
+                           <option value="10">10</option>
+                           <option value="11">11</option>
+                           <option value="12">12</option>
+                           <option value="13">13</option>
+                           <option value="14">14</option>
+                           <option value="15">15</option>
+                           <option value="16">16</option>
+                           <option value="17">17</option>
+                           <option value="18">18</option>
+                           <option value="19">19</option>
+                           <option value="20">20</option>
+                           <option value="21">21</option>
+                           <option value="22">22</option>
+                           <option value="23">23</option>
+                           <option value="24">24</option>
+                           <option value="25">25</option>
+                           <option value="26">26</option>
+                           <option value="27">27</option>
+                           <option value="28">28</option>
+                           <option value="29">29</option>
+                           <option value="30">30</option>
+                           <option value="31">31</option>
+                        </select>
+                     </div>
+                     <div class="ui-block-b">
+                        <select data-native-menu="false" id="bln_lahir" name="bln_lahir" data-mini="true">
+                           <option value="0">Bulan</option>
+                           <option value="01">Januari</option>
+                           <option value="02">Februari</option>
+                           <option value="03" selected="selected">Maret</option>
+                           <option value="04">April</option>
+                           <option value="05">Mei</option>
+                           <option value="06">Juni</option>
+                           <option value="07">Juli</option>
+                           <option value="08">Agustus</option>
+                           <option value="09">September</option>
+                           <option value="10">Oktober</option>
+                           <option value="11">November</option>
+                           <option value="12">Desember</option>
+                        </select>
+                     </div>
+                  </div>
+                  <div data-role="fieldcontain">
+                     <label for="thn_lahir">Tahun</label>
+                     <input type="text" id="thn_lahir" name="thn_lahir" placeholder="Tahun" data-mini="true" value="1998">
+                  </div>
+                  <select data-native-menu="false" id="k_jenjang" name="k_jenjang">
+                     <option value="0">Jenjang</option>
+                     <option value="1">SD/MI</option>
+                     <option value="2" selected="selected">SMP/MTs</option>
+                     <option value="3">SMA/MA</option>
+                     <option value="4">SMK/MAK</option>
+                  </select>
+                  <div data-role="fieldcontain">
+                     <label for="captcha">Captcha</label>
+                     <input type="text" id="captcha" name="captcha" placeholder="masukan code captcha di bawah ini">
+                  </div>
+                  <img src="http://unas.siap-online.com/denpasar/cari/captcha/index?_=1370407865883ge/no-image.jpg" style="display: block; margin: 0 auto">
+                  <input type="button" id="cari" name="cari" href="#page_hasilCari" value="Cari Hasil" />
+               </form>
+            </div>
+			<script>
+			$(document).ready(function() {
+	$( "#error-msg" ).popup();
+	$("#cari").click(function() {
+
+		// Post string
+		var post_kJenjang = $.trim($("#k_jenjang").val());
+		var post_noujian = $.trim($("#no_ujian").val());
+		var post_tglLhr = $.trim($("#tgl_lhr").val());
+		var post_blnLahir = $.trim($("#bln_lahir").val());
+		var post_thnLahir = $.trim($("#thn_lahir").val());
+		var post_tglLahir = post_thnLahir + "-" + post_blnLahir + "-" + post_tglLhr;
+		var post_captcha = $.trim($("#captcha").val());
+
+		$.ajax({
+			type : 'GET',
+			url : "http://unas.siap-online.dev/denpasar/cari/?k_jenjang=" + post_kJenjang + "&no_ujian=" + post_noujian + "&tgl_lahir=" + post_tglLahir + "&captcha=" + post_captcha + "&callback=?",
+			async : false,
+			// jsonpCallback : '',
+			contentType : "application/json",
+			dataType : 'jsonp',
+			success : function (data) {
+				//on error
+				if (data.code == 99999 && data.message) {
+					$( "#error-msg p").empty();
+					$( "#error-msg p").html(data.message);
+					$( "#error-msg" ).popup( "open" )
+
+				} else {
+					$.mobile.changePage($('#page_hasilCari'), {transition : "slide"});
+					$('#list_hasil').empty();
+					//array 0 = biodata siswa
+					
+					$.each(data[0][1], function(key, value){
+						$('#list_hasil').append('<p>'+'Biodata Siswa'+'</p>'+'<div data-role="collapsible" data-theme="b" data-content-theme="d" data-inset="false">'+'<ul class="ui-listview ui-listview-inset ui-corner-all ui-shadow" data-inset="true" data-role="listview">'+'<li class="ui-li ui-li-divider ui-bar-b ui-li-has-count ui-first-child" data-role="list-divider" role="heading">'+ value[0] +'</li>'+ '<li class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-c" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="c">' + '<div class="ui-btn-inner ui-li">' + '<div class="ui-btn-text">' + '<p>' + value[1] + '</p>'+'</div>'+'</div>'+'</li>'+'</ul>'+'</div>');
+						//$('#list_hasil').append('<div data-role="collapsible" data-theme="b" data-content-theme="d" data-inset="false">'+'<h3>'+'Biodata Siswa'+'</h3>'+'<ul data-role="listview">'+'<li>'+'1'+'</li>'+'</ul>'+'</div>');
+					});
+					//array 1 =
+					$.each(data[1][1], function(key, value){
+						$('#list_hasil').append('<p>'+'Biodata Siswa'+'</p>'+'<div data-role="collapsible" data-theme="b" data-content-theme="d" data-inset="false">'+'<ul class="ui-listview ui-listview-inset ui-corner-all ui-shadow" data-inset="true" data-role="listview">'+'<li class="ui-li ui-li-divider ui-bar-b ui-li-has-count ui-first-child" data-role="list-divider" role="heading">'+ value[0] +'</li>'+ '<li class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-c" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="c">' + '<div class="ui-btn-inner ui-li">' + '<div class="ui-btn-text">' + '<p>' + value[1] + '</p>'+'</div>'+'</div>'+'</li>'+'</ul>'+'</div>');
+						//$('#list_hasil').append('<div data-role="collapsible" data-theme="b" data-content-theme="d" data-inset="false">'+'<h3>'+'Nilai Ujian Nasional'+'</h3>'+'<ul data-role="listview">'+'<li>'+'1'+'</li>'+'</ul>'+'</div>');
+					});
+					//array 2 =
+					$.each(data[2][1], function(key, value){
+						$('#list_hasil').append('<p>'+'Biodata Siswa'+'</p>'+'<div data-role="collapsible" data-theme="b" data-content-theme="d" data-inset="false">'+'<ul class="ui-listview ui-listview-inset ui-corner-all ui-shadow" data-inset="true" data-role="listview">'+'<li class="ui-li ui-li-divider ui-bar-b ui-li-has-count ui-first-child" data-role="list-divider" role="heading">'+ value[0] +'</li>'+ '<li class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-c" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="c">' + '<div class="ui-btn-inner ui-li">' + '<div class="ui-btn-text">' + '<p>' + value[1] + '</p>'+'</div>'+'</div>'+'</li>'+'</ul>'+'</div>');
+						//$('#list_hasil').append('<div data-role="collapsible" data-theme="b" data-content-theme="d" data-inset="false">'+'<h3>'+'Nilai Ujian Sekolah'+'</h3>'+'<ul data-role="listview">'+'<li>'+'1'+'</li>'+'</ul>'+'</div>');
+					});
+					//array 3 =
+					$.each(data[3][1], function(key, value){
+						$('#list_hasil').append('<p>'+'Biodata Siswa'+'</p>'+'<div data-role="collapsible" data-theme="b" data-content-theme="d" data-inset="false">'+'<ul class="ui-listview ui-listview-inset ui-corner-all ui-shadow" data-inset="true" data-role="listview">'+'<li class="ui-li ui-li-divider ui-bar-b ui-li-has-count ui-first-child" data-role="list-divider" role="heading">'+ value[0] +'</li>'+ '<li class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-c" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="c">' + '<div class="ui-btn-inner ui-li">' + '<div class="ui-btn-text">' + '<p>' + value[1] + '</p>'+'</div>'+'</div>'+'</li>'+'</ul>'+'</div>');
+						//$('#list_hasil').append('<div data-role="collapsible" data-theme="b" data-content-theme="d" data-inset="false">'+'<h3>'+'Status Kelulusan'+'</h3>'+'<ul data-role="listview">'+'<li>'+'1'+'</li>'+'</ul>'+'</div>');
+					});
+				}
+			},
+			error : function(e) {
+				console.log(e.message);
+			}
+		});
+
+	});
+});
+
+			</script>
+         </div>
+         <div data-role="footer" data-position="fixed" data-theme="b">
+            <div data-role="navbar">
+               <ul>
+                  <li>
+                     <a data-role="button" id="nav_cari" data-icon="search" data-theme="b">Cari</a>
+                  </li>
+                  <li>
+                     <a data-role="button" id="nav_berita" href="#page_berita" data-icon="info" data-theme="b">Berita</a>
+                  </li>
+                  <li>
+                     <a data-role="button" id="nav_pesan" href="#page_pesan" data-icon="check" data-theme="b">Pesan Anda</a>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
+      
+      
+      <div data-role="page" id="page_hasilCari" data-title="HASIL UJIAN NASIONAL">
+        
+         <div data-role="header" id="header_hasil" data-position="fixed" data-theme="b">
+            <h1>DATA SISWA</h1>
+         </div>
+         <div data-role="content" data-role="collapsible" data-theme="b" data-content-theme="d" data-inset="false">
+            <div class="div-widget" id="div_biodata">
+			<ul data-role="listview" id="list_hasil" data-inset="true"></ul>
+            </div>
+
+         </div>
+         
+         
+         <div data-role="footer" data-position="fixed" data-theme="b">
+            <div data-role="navbar">
+               <ul>
+                  <li>
+                     <a data-role="button" id="nav_cari" href="#page_cari" data-icon="search">Cari</a>
+                  </li>
+                  <li>
+                     <a data-role="button" id="nav_berita" href="#page_berita" data-icon="info">Berita</a>
+                  </li>
+                  <li>
+                     <a data-role="button" id="nav_pesan" href="#page_pesan" data-icon="check">Pesan Anda</a>
+                  </li>
+               </ul>
+            </div>
+         </div> 
+      </div>
+      
+      
+      
+      <div data-role="popup" id="error-msg">
+         <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+         <p></p>
+      </div>
+<!-- END OF HALAMAN CARI -->
+
+<!-- HALAMAN BERITA START -->
+ 
+<div data-role="page" id="page_berita">
+            <div data-role="header" data-add-back-btn="true" id="head_berita" data-position="fixed" data-theme="b">
+                <h1>BERITA</h1>
+				
+                <a data-role="button" class="ui-btn-right" id="bt_share" href="#page_share"
+                data-rel="dialog" data-transition="pop" data-icon="gear" data-iconpos="notext"></a>
+            </div>
+           <div data-role="content">
+
+		  <br/>
+		  
+		   
+		   <!-- This is where the result of dynamically created listitems will be appended. -->
+		  <ul id="result-listview" class="listview" data-role="listview" data-theme="b">
+		  
+		  </ul>
+   <script>
+   "use strict";
+    function jsonp(url) {
+      var head = document.head;
+      var script = document.createElement("script");
+
+      script.setAttribute("src", url);
+      head.appendChild(script);
+      head.removeChild(script);
+    }
+
+
+    function createListView() {
+	
+	jsonp("http://unas.siap-online.com/denpasar/berita/?callback=judul");
+	
+	
+	
+	 
+
+	 /*This function helps is mapping each listitem to its correspondig 
+	 handler.*/ 
+	
+ 
+ }
+ function changePage(id) {
+		$.mobile.changePage($(id), {transition : "slide"});
+	}
+ 
+ 
+ function judul(data) {
+	  //console.log(data);
+	  //data = data.judul.berita;
+            //var len = data.berita.length;
+	//for(var i=0;i<len;i++){
+      
+      var beritaData = data.berita;
+
+      
+
+	    $.each(beritaData, function(index, berita) {
+			//console.log(berita);
+
+		    $('#result-listview').append(
+		      '<li>'  +
+		        '<a href="" onclick="changePage(id_' + index + ');">' +
+					'<h3>' + berita.judul + '</h3>' +
+				'</a>' +
+		      '</li>'
+		    );
+
+		    /*
+				Here we are dynamically creating a new page.
+				When a list item is clicked, this is what is actually shown.
+				Do not forget to append this block of code
+				to the body tag. If appended mistakenly somewhere else,
+				the code wont work.
+		    */
+		   var content  = 	'<div data-role="page" id="id_' + index + '" data-url="id_' + index + '">' +
+							'<div data-role="header" data-position="fixed" data-theme="b">' +
+							'<a href="#" data-rel="back" data-icon="back">Back</a>' + '<a data-role="button" class="ui-btn-right" id="bt_share" href="#page_share" data-rel="dialog" data-transition="pop" data-icon="gear" data-iconpos="notext"></a>' +
+							  '<h1>' + berita.judul + '</h1>' +
+							'</div>' +
+							'<div data-role="content">' +
+							  '<p>' + 
+							    '<div data-role="fieldcontain" class="result">'+ '<font color="blue">' + 'Di Postkan Pada:   ' + berita.wkt_tayang + '</font>' +'<br/>' + berita.content 
+							    '</div>' +
+							  '</p>' +
+							'</div>' +
+							
+					    '</div>';
+						
+						
+
+			$('body').append(content);
+
+			/*Tell JQM to enhance the page with the required classes.*/
+			$(index).page();
+
+        });	// end for each
+		
+	  	$('#result-listview').listview('refresh');
+      //}
+	  
+    }
+	
+	
+	(function($) {
+	// fungsi dijalankan setelah seluruh dokumen ditampilkan
+	createListView();
+}) (jQuery);
+	
+  </script>
+            
+			
+            <div data-role="footer" data-position="fixed" data-theme="b">
+                <div data-role="navbar">
+                    <ul>
+                        <li>
+                            <a data-role="button" id="nav_cari" href="#page_cari" data-icon="search">Cari</a>
+                        </li>
+                        <li>
+                            <a data-role="button" id="nav_berita" data-icon="info">Berita</a>
+                        </li>
+                        <li>
+                            <a data-role="button" id="nav_pesan" href="#page_pesan" data-icon="check">Pesan Anda</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+		</div>
+
+ <div data-role="page" id="page_share">
+            <div data-role="header" id="head_share" data-position="fixed" data-theme="b">
+                <h1>SHARE / BAGIKAN</h1>
+            </div>
+            <div data-role="content">
+                <div class="div-widget" id="div_share">
+                    <h2>Pilih Sosial Media</h2>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a">
+                            <a data-role="button" id="btn_siap" data-rel="dialog" data-icon="home">SIAPku</a>
+                            <a data-role="button" id="btn_fb" data-rel="dialog" data-icon="home">FB</a>
+                        </div>
+                        <div class="ui-block-b">
+                            <a data-role="button" id="btn_twter" data-rel="dialog" data-icon="home">Twitter</a>
+                            <a data-role="button" id="btn_googlepls" data-rel="dialog" data-icon="home">Google+</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div data-role="footer" id="footer_share" data-position="fixed" data-theme="b">
+                <h1>--------------------------------------------</h1>
+            </div>
+        </div>
+
+<!-- END OF HALAMAN BERITA -->
+
+<!-- HALAMAN PESAN START -->
+<div data-role="page" id="page_pesan">
+         <div data-role="header" id="head_psan" data-position="fixed" data-theme="b">
+            <h1>PESAN ANDA</h1>
+            <a data-role="button" class="ui-btn-right" id="bt_tmbahPsan" href="#page_tmbhPesan"
+            data-icon="plus" data-iconpos="notext" data-corners="false"></a>
+         </div>
+         <div data-role="content">
+            
+            <div class="div-widget" id="div_pesan">
+               <ul data-role="listview" id="list_pesan" data-inset="true"></ul>
+            </div>
+            <script type="text/javascript">
+				(function($) {
+					var url = 'http://unas.siap-online.com/denpasar/pesan/?callback=?';
+
+					$.ajax({
+						type : 'GET',
+						url : url,
+						async : false,
+						jsonpCallback : 'jsonCallback',
+						contentType : "application/json",
+						dataType : 'jsonp',
+						success : function pesan(data) {
+							var list = '';
+							data = data.pesan;
+							var len = data.length;
+							for (var i = 0; i < len; i++) {
+
+								var pesan = data[i];
+								//list += '<ul class="ui-listview ui-listview-inset ui-corner-all ui-shadow" data-inset="true" data-role="listview">'+'<li class="ui-li ui-li-divider ui-bar-b ui-li-has-count ui-first-child" data-role="list-divider" role="heading">'+ pesan.nama + ' ' +'||' + ' ' + pesan.email  + '</li>'+ '<li>' + '<div data-role="fieldcontain" class="result">' + '<p>' + pesan.content + '</p>'+'</div>'+'</li>' + '<div data-role="fieldcontain" class="result2" data-theme="b">' + 'Jawaban : ' + '</div>' + '</ul>';
+								list +='<div data-role="header" data-theme="c">'+'<ul data-role="listview" data-inset="true">'+'<li data-role="list-divider">'+'<h2>'+pesan.nama+'</h2>'+'<p>'+pesan.email+'</p>'+'<strong>'+pesan.content+'</strong>'+'<p class="ui-li-aside">'+'<strong>'+pesan.wkt_kirim+'</strong>'+'</p>'+'</li>'+'<li data-theme="f">'+'<h2>'+'Jawaban : '+'</h2>'+'<p>'+'<strong>'+'</strong>'+'</p>'+pesan.jawab+'</p>'+'</li>'+'</ul>'+'</div>';
+    
+							}
+
+							$('#list_pesan').append(list);
+							//$('#list_pesan').listview('refresh');
+						},
+						error : function(e) {
+							console.log(e.message);
+						}
+					});
+
+				})(jQuery);
+
+            </script>
+         </div>
+         <div data-role="footer" data-position="fixed" data-theme="b">
+            <div data-role="navbar">
+               <ul>
+                  <li>
+                     <a data-role="button" id="nav_cari" href="#page_cari" data-icon="search">Cari</a>
+                  </li>
+                  <li>
+                     <a data-role="button" id="nav_berita" href="#page_berita" data-icon="info">Berita</a>
+                  </li>
+                  <li>
+                     <a data-role="button" id="nav_pesan" data-icon="check">Pesan Anda</a>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
+      <div data-role="page" id="page_tmbhPesan">
+         <div data-role="header" id="head_tmbah" data-position="fixed" data-theme="b">
+            <h1>Pesan Anda</h1>
+            <a data-role="button" id="btn_back" href="#page_pesan" data-icon="back"
+            data-iconpos="notext"></a>
+         </div>
+         <div data-role="content">
+            <div class="div-widget" id="div_tmbhBrita">
+               <form id="form_tambahPesan" action="http://unas.siap-online.dev/denpasar/pesan/insert"
+               method="POST">
+                  <div data-role="fieldcontain">
+                     <label for="nama">Nama</label>
+                     <input type="text" id="nama" name="pesan[nama]" value="" placeholder="Tuliskan nama Anda" data-mini="true" />
+                  </div>
+                  <div data-role="fieldcontain">
+                     <label for="email">Email</label>
+                     <input type="text" id="email" name="pesan[email]" value="" placeholder="Email anda" data-mini="true">
+                  </div>
+                  <div data-role="fieldcontain">
+                     <label for="judul">Judul</label>
+                     <input type="text" id="judul" name="pesan[judul]" value="" placeholder="Judul Pesan" data-mini="true">
+                  </div>
+                  <span>Isi Pesan</span>
+                  <textarea name="pesan[content]" value=""></textarea>
+                  <fieldset data-role="controlgroup" id="is_check" data-mini="true">
+                     <legend></legend>
+                     <input type="checkbox" id="is_tampil" name="pesan[is_tampil]" value="1" checked="checked" data-mini="true">
+                     <label for="is_tampil">Tampil Jawaban Di Web</label>
+                     <input type="checkbox" id="is_kirim" name="pesan[is_kirim]" value="0" data-mini="true">
+                     <label for="is_kirim">Kirim jawaban ke Email</label>
+                  </fieldset>
+                  <h4>Capcha</h4>
+                  <img id="capcha" src="http://unas.siap-online.com/denpasar/pesan/captcha/index?_=1371005782426"
+                  style="display: block; margin: 0 auto">
+                  <div data-role="fieldcontain">
+                     <label for="captcha"></label>
+                     <input type="text" id="captcha" name="captcha" value="" placeholder="masukan kode diatas">
+                  </div>
+                  <div class="ui-grid-a">
+                     <div class="ui-block-a">
+                        <a data-role="button" id="btn_cancel" href="#page_pesan" data-icon="delete">Batal</a>
+                     </div>
+                     <div class="ui-block-b">
+                        <input type="button" value="Kirim Pesan" href="#page_dialog"  data-icon="check" data-iconpos="right" id="pesan-send">
+
+                     </div>
+                  </div>
+               </form>
+               <script type="text/javascript">
+		$(document).ready(function() {
+		   $( "#error-msg" ).popup();
+			$('#pesan-send').click(function(e) {
+				e.preventDefault();
+
+				// Post string
+				var post_pnama = $.trim($("#pesan[nama]").val());
+				var post_pemail = $.trim($("#pesan[email]").val());
+				var post_pjudul = $.trim($("#pesan[judul]").val());
+				var post_pcontent = $.trim($("#pesan[content]").val());
+				var post_pistampil = $.trim($("#pesan[is_tampil]").val());
+				var post_piskirim =$.trim($("#pesan[is_kirim]").val());
+				var post_captcha = $.trim($("#captcha").val());
+
+				$.ajax({
+					type : 'POST',
+					url : "http://unas.siap-online.com/denpasar/pesan/insert/?pesan[nama]=" + post_pnama + "&pesan[email]=" + post_pemail + "&pesan[judul]=" + post_pjudul + "&pesan[content]=" + post_pcontent + "&pesan[is_tampil]=" + post_pistampil + "&pesan[is_kirim]=" + post_piskirim + "&captcha=" + post_captcha + "&callback=?",
+					async : false,
+					// jsonpCallback : '',
+					contentType : "application/json",
+					dataType : 'jsonp',
+					success : function(data) {
+						//on error
+						if (data.code == 99999 && data.message) {
+							$("#error-msg p").empty();
+							$("#error-msg p").html(data.message);
+							$("#error-msg").popup("open")
+
+						} else {
+							$.mobile.changePage($('#page_pesan'), {
+								transition : "slide"
+							});
+						}
+					},
+					error : function(e) {
+						console.log(e.message);
+					}
+				});
+
+			});
+		});
+      </script>
+
+            </div>
+
+         </div>
+         <div data-role="footer" data-position="fixed" data-theme="b">
+            <div data-role="navbar">
+               <ul>
+                  <li>
+                     <a data-role="button" id="nav_cari" href="#page_cari" data-icon="search">Cari </a>
+                  </li>
+                  <li>
+                     <a data-role="button" id="nav_berita" href="#page_berita" data-icon="info">Berita</a>
+                  </li>
+                  <li>
+                     <a data-role="button" id="nav_pesan" href="#page_pesan" data-icon="check">Pesan</a>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
+      <div data-role="dialog" id="page_dialog" data-theme="b" data-title="Pesan Berhasil Dikirim">
+         <div data-role="header" id="dialog_id" data-position="fixed" data-theme="b">
+            <h1>Pesan Berhasil Dikirim</h1>
+         </div>
+         <div data-role="content">
+            <p>
+               Pesan berhasil Dikirim.
+            </p>
+         </div>
+         <div data-role="footer" data-theme="b"></div>
+      </div>
+      
+      <div data-role="popup" id="error-msg">
+         <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+         <p></p>
+      </div>
+<!-- END OF HALAMAN PESAN -->	  
+	  
+	</body>
+</html>
