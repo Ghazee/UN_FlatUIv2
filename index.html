@@ -234,7 +234,7 @@
 		  <ul id="result-listview" class="listview" data-role="listview" data-theme="b">
 		  
 		  </ul>
-	<script type="text/javascript">
+   <script type="text/javascript">
 	function changePage(id) {
 		$.mobile.changePage($(id), {transition : "slide"});
 	}
@@ -246,11 +246,11 @@
 						type : 'GET',
 						url : url,
 						async : false,
-						jsonpCallback : 'jsonCallback',
+						jsonpCallback : 'jsonCallbackk',
 						contentType : "application/json",
 						dataType : 'jsonp',
-						success : function berita(data) {
-							 var beritaData = data.berita;
+						success : function berita(data2) {
+							 var beritaData = data2.berita;
 
       
 
@@ -309,6 +309,7 @@
 				})(jQuery);
 
             </script>
+            
 			
             <div data-role="footer" data-position="fixed" data-theme="b">
                 <div data-role="navbar">
@@ -353,6 +354,7 @@
         </div>
 
 <!-- END OF HALAMAN BERITA -->
+
 <!-- HALAMAN PESAN START -->
 <div data-role="page" id="page_pesan">
          <div data-role="header" id="head_psan" data-position="fixed" data-theme="b">
