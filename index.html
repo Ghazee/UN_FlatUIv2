@@ -92,7 +92,7 @@
                      <label for="captcha">Captcha</label>
                      <input type="text" id="captcha" name="captcha" placeholder="masukan code captcha di bawah ini">
                   </div>
-                  <img src="http://unas.siap-online.com/denpasar/cari/captcha/index?_=1370407865883ge/no-image.jpg" style="display: block; margin: 0 auto">
+                  <img src="http://unas.siap-online.dev/denpasar/cari/captcha/index?_=1370407865883ge/no-image.jpg" style="display: block; margin: 0 auto">
                   <input type="button" id="cari" name="cari" href="#page_hasilCari" value="Cari Hasil" />
                </form>
             </div>
@@ -130,22 +130,22 @@
 					//array 0 = biodata siswa
 					
 					$.each(data[0][1], function(key, value){
-						$('#list_hasil').append('<p>'+'Biodata Siswa'+'</p>'+'<div data-role="collapsible" data-theme="b" data-content-theme="d" data-inset="false">'+'<ul class="ui-listview ui-listview-inset ui-corner-all ui-shadow" data-inset="true" data-role="listview">'+'<li class="ui-li ui-li-divider ui-bar-b ui-li-has-count ui-first-child" data-role="list-divider" role="heading">'+ value[0] +'</li>'+ '<li class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-c" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="c">' + '<div class="ui-btn-inner ui-li">' + '<div class="ui-btn-text">' + '<p>' + value[1] + '</p>'+'</div>'+'</div>'+'</li>'+'</ul>'+'</div>');
+						$('#list_hasil').append('<div data-role="collapsible" data-theme="b" data-content-theme="d" data-inset="false">'+'<ul class="ui-listview ui-listview-inset ui-corner-all ui-shadow" data-inset="true" data-role="listview">'+'<li class="ui-li ui-li-divider ui-bar-b ui-li-has-count ui-first-child" data-role="list-divider" role="heading">'+ value[0] +'</li>'+ '<li class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-c" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="c">' + '<div class="ui-btn-inner ui-li">' + '<div class="ui-btn-text">' + '<p>' + value[1] + '</p>'+'</div>'+'</div>'+'</li>'+'</ul>'+'</div>');
 						//$('#list_hasil').append('<div data-role="collapsible" data-theme="b" data-content-theme="d" data-inset="false">'+'<h3>'+'Biodata Siswa'+'</h3>'+'<ul data-role="listview">'+'<li>'+'1'+'</li>'+'</ul>'+'</div>');
 					});
 					//array 1 =
 					$.each(data[1][1], function(key, value){
-						$('#list_hasil').append('<p>'+'Biodata Siswa'+'</p>'+'<div data-role="collapsible" data-theme="b" data-content-theme="d" data-inset="false">'+'<ul class="ui-listview ui-listview-inset ui-corner-all ui-shadow" data-inset="true" data-role="listview">'+'<li class="ui-li ui-li-divider ui-bar-b ui-li-has-count ui-first-child" data-role="list-divider" role="heading">'+ value[0] +'</li>'+ '<li class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-c" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="c">' + '<div class="ui-btn-inner ui-li">' + '<div class="ui-btn-text">' + '<p>' + value[1] + '</p>'+'</div>'+'</div>'+'</li>'+'</ul>'+'</div>');
+						$('#list_hasil').append('<div data-role="collapsible" data-theme="b" data-content-theme="d" data-inset="false">'+'<ul class="ui-listview ui-listview-inset ui-corner-all ui-shadow" data-inset="true" data-role="listview">'+'<li class="ui-li ui-li-divider ui-bar-b ui-li-has-count ui-first-child" data-role="list-divider" role="heading">'+ value[0] +'</li>'+ '<li class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-c" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="c">' + '<div class="ui-btn-inner ui-li">' + '<div class="ui-btn-text">' + '<p>' + value[1] + '</p>'+'</div>'+'</div>'+'</li>'+'</ul>'+'</div>');
 						//$('#list_hasil').append('<div data-role="collapsible" data-theme="b" data-content-theme="d" data-inset="false">'+'<h3>'+'Nilai Ujian Nasional'+'</h3>'+'<ul data-role="listview">'+'<li>'+'1'+'</li>'+'</ul>'+'</div>');
 					});
 					//array 2 =
 					$.each(data[2][1], function(key, value){
-						$('#list_hasil').append('<p>'+'Biodata Siswa'+'</p>'+'<div data-role="collapsible" data-theme="b" data-content-theme="d" data-inset="false">'+'<ul class="ui-listview ui-listview-inset ui-corner-all ui-shadow" data-inset="true" data-role="listview">'+'<li class="ui-li ui-li-divider ui-bar-b ui-li-has-count ui-first-child" data-role="list-divider" role="heading">'+ value[0] +'</li>'+ '<li class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-c" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="c">' + '<div class="ui-btn-inner ui-li">' + '<div class="ui-btn-text">' + '<p>' + value[1] + '</p>'+'</div>'+'</div>'+'</li>'+'</ul>'+'</div>');
+						$('#list_hasil').append('<div data-role="collapsible" data-theme="b" data-content-theme="d" data-inset="false">'+'<ul class="ui-listview ui-listview-inset ui-corner-all ui-shadow" data-inset="true" data-role="listview">'+'<li class="ui-li ui-li-divider ui-bar-b ui-li-has-count ui-first-child" data-role="list-divider" role="heading">'+ value[0] +'</li>'+ '<li class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-c" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="c">' + '<div class="ui-btn-inner ui-li">' + '<div class="ui-btn-text">' + '<p>' + value[1] + '</p>'+'</div>'+'</div>'+'</li>'+'</ul>'+'</div>');
 						//$('#list_hasil').append('<div data-role="collapsible" data-theme="b" data-content-theme="d" data-inset="false">'+'<h3>'+'Nilai Ujian Sekolah'+'</h3>'+'<ul data-role="listview">'+'<li>'+'1'+'</li>'+'</ul>'+'</div>');
 					});
 					//array 3 =
 					$.each(data[3][1], function(key, value){
-						$('#list_hasil').append('<p>'+'Biodata Siswa'+'</p>'+'<div data-role="collapsible" data-theme="b" data-content-theme="d" data-inset="false">'+'<ul class="ui-listview ui-listview-inset ui-corner-all ui-shadow" data-inset="true" data-role="listview">'+'<li class="ui-li ui-li-divider ui-bar-b ui-li-has-count ui-first-child" data-role="list-divider" role="heading">'+ value[0] +'</li>'+ '<li class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-c" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="c">' + '<div class="ui-btn-inner ui-li">' + '<div class="ui-btn-text">' + '<p>' + value[1] + '</p>'+'</div>'+'</div>'+'</li>'+'</ul>'+'</div>');
+						$('#list_hasil').append('<div data-role="collapsible" data-theme="b" data-content-theme="d" data-inset="false">'+'<ul class="ui-listview ui-listview-inset ui-corner-all ui-shadow" data-inset="true" data-role="listview">'+'<li class="ui-li ui-li-divider ui-bar-b ui-li-has-count ui-first-child" data-role="list-divider" role="heading">'+ value[0] +'</li>'+ '<li class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-c" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="c">' + '<div class="ui-btn-inner ui-li">' + '<div class="ui-btn-text">' + '<p>' + value[1] + '</p>'+'</div>'+'</div>'+'</li>'+'</ul>'+'</div>');
 						//$('#list_hasil').append('<div data-role="collapsible" data-theme="b" data-content-theme="d" data-inset="false">'+'<h3>'+'Status Kelulusan'+'</h3>'+'<ul data-role="listview">'+'<li>'+'1'+'</li>'+'</ul>'+'</div>');
 					});
 				}
@@ -248,7 +248,7 @@
 
     function createListView() {
 	
-	jsonp("http://unas.siap-online.com/denpasar/berita/?callback=judul");
+	jsonp("http://unas.siap-online.dev/denpasar/berita/?callback=judul");
 	
 	
 	
@@ -387,7 +387,7 @@
             </div>
             <script type="text/javascript">
 				(function($) {
-					var url = 'http://unas.siap-online.com/denpasar/pesan/?callback=?';
+					var url = 'http://unas.siap-online.dev/denpasar/pesan/?callback=?';
 
 					$.ajax({
 						type : 'GET',
@@ -404,7 +404,7 @@
 
 								var pesan = data[i];
 								//list += '<ul class="ui-listview ui-listview-inset ui-corner-all ui-shadow" data-inset="true" data-role="listview">'+'<li class="ui-li ui-li-divider ui-bar-b ui-li-has-count ui-first-child" data-role="list-divider" role="heading">'+ pesan.nama + ' ' +'||' + ' ' + pesan.email  + '</li>'+ '<li>' + '<div data-role="fieldcontain" class="result">' + '<p>' + pesan.content + '</p>'+'</div>'+'</li>' + '<div data-role="fieldcontain" class="result2" data-theme="b">' + 'Jawaban : ' + '</div>' + '</ul>';
-								list +='<div data-role="header" data-theme="c">'+'<ul data-role="listview" data-inset="true">'+'<li data-role="list-divider">'+'<h2>'+pesan.nama+'</h2>'+'<p>'+pesan.email+'</p>'+'<strong>'+pesan.content+'</strong>'+'<p class="ui-li-aside">'+'<strong>'+pesan.wkt_kirim+'</strong>'+'</p>'+'</li>'+'<li data-theme="f">'+'<h2>'+'Jawaban : '+'</h2>'+'<p>'+'<strong>'+'</strong>'+'</p>'+pesan.jawab+'</p>'+'</li>'+'</ul>'+'</div>';
+								list +='<div data-role="header" data-theme="c">'+'<ul data-role="listview" data-inset="true">'+'<li data-role="list-divider">'+'<h2>'+pesan.nama+'</h2>'+'<p>'+pesan.email+'</p>'+'<strong>'+pesan.content+'</strong>'+'<p class="ui-li-aside">'+'<strong>'+pesan.wkt_kirim+'</strong>'+'</p>'+'</li>'+'<li data-theme="c">'+'<h2>'+'Jawaban : '+'</h2>'+'<p>'+'<strong>'+'</strong>'+'</p>'+pesan.jawab+'</p>'+'</li>'+'</ul>'+'</div>';
     
 							}
 
@@ -468,7 +468,7 @@
                      <label for="is_kirim">Kirim jawaban ke Email</label>
                   </fieldset>
                   <h4>Capcha</h4>
-                  <img id="capcha" src="http://unas.siap-online.com/denpasar/pesan/captcha/index?_=1371005782426"
+                  <img id="capcha" src="http://unas.siap-online.dev/denpasar/pesan/captcha/index?_=1371005782426"
                   style="display: block; margin: 0 auto">
                   <div data-role="fieldcontain">
                      <label for="captcha"></label>
@@ -501,7 +501,7 @@
 
 				$.ajax({
 					type : 'POST',
-					url : "http://unas.siap-online.com/denpasar/pesan/insert/?pesan[nama]=" + post_pnama + "&pesan[email]=" + post_pemail + "&pesan[judul]=" + post_pjudul + "&pesan[content]=" + post_pcontent + "&pesan[is_tampil]=" + post_pistampil + "&pesan[is_kirim]=" + post_piskirim + "&captcha=" + post_captcha + "&callback=?",
+					url : "http://unas.siap-online.dev/denpasar/pesan/insert/?pesan[nama]=" + post_pnama + "&pesan[email]=" + post_pemail + "&pesan[judul]=" + post_pjudul + "&pesan[content]=" + post_pcontent + "&pesan[is_tampil]=" + post_pistampil + "&pesan[is_kirim]=" + post_piskirim + "&captcha=" + post_captcha + "&callback=?",
 					async : false,
 					// jsonpCallback : '',
 					contentType : "application/json",
