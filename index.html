@@ -234,43 +234,23 @@
 		  <ul id="result-listview" class="listview" data-role="listview" data-theme="b">
 		  
 		  </ul>
-   <script>
-   "use strict";
-    function jsonp(url) {
-      var head = document.head;
-      var script = document.createElement("script");
-
-      script.setAttribute("src", url);
-      head.appendChild(script);
-      head.removeChild(script);
-    }
-
-
-    function createListView() {
-	
-	jsonp("http://unas.siap-online.dev/denpasar/berita/?callback=judul");
-	
-	
-	
-	 
-
-	 /*This function helps is mapping each listitem to its correspondig 
-	 handler.*/ 
-	
- 
- }
- function changePage(id) {
+	<script type="text/javascript">
+	function changePage(id) {
 		$.mobile.changePage($(id), {transition : "slide"});
 	}
- 
- 
- function judul(data) {
-	  //console.log(data);
-	  //data = data.judul.berita;
-            //var len = data.berita.length;
-	//for(var i=0;i<len;i++){
-      
-      var beritaData = data.berita;
+	
+				(function($) {
+					var url = 'http://unas.siap-online.dev/denpasar/berita/?callback=?';
+
+					$.ajax({
+						type : 'GET',
+						url : url,
+						async : false,
+						jsonpCallback : 'jsonCallback',
+						contentType : "application/json",
+						dataType : 'jsonp',
+						success : function berita(data) {
+							 var beritaData = data.berita;
 
       
 
@@ -318,16 +298,17 @@
 	  	$('#result-listview').listview('refresh');
       //}
 	  
-    }
-	
-	
-	(function($) {
-	// fungsi dijalankan setelah seluruh dokumen ditampilkan
-	createListView();
-}) (jQuery);
-	
-  </script>
-            
+    
+						},
+						error : function(e) {
+							console.log(e.message);
+						}
+					});
+
+					
+				})(jQuery);
+
+            </script>
 			
             <div data-role="footer" data-position="fixed" data-theme="b">
                 <div data-role="navbar">
@@ -372,7 +353,6 @@
         </div>
 
 <!-- END OF HALAMAN BERITA -->
-
 <!-- HALAMAN PESAN START -->
 <div data-role="page" id="page_pesan">
          <div data-role="header" id="head_psan" data-position="fixed" data-theme="b">
