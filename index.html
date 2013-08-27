@@ -6,6 +6,10 @@
   <link rel="stylesheet" type="text/css" href="css/jquery.mobile.flatui.css" />
   <script src="js/jquery.min.js"></script>
   <script src="js/jquery.mobile-1.3.1.min.js"></script>
+  <script src="js/cari.js"></script>
+  <script src="js/berita.js"></script>
+  <script src="js/pesan.js"></script>
+  <script src="js/tmbhPesan.js"></script>
 </head>
 <body>
 	
@@ -96,69 +100,7 @@
                   <input type="button" id="cari" name="cari" href="#page_hasilCari" value="Cari Hasil" />
                </form>
             </div>
-			<script>
-			$(document).ready(function() {
-	$( "#error-msg" ).popup();
-	$("#cari").click(function() {
-
-		// Post string
-		var post_kJenjang = $.trim($("#k_jenjang").val());
-		var post_noujian = $.trim($("#no_ujian").val());
-		var post_tglLhr = $.trim($("#tgl_lhr").val());
-		var post_blnLahir = $.trim($("#bln_lahir").val());
-		var post_thnLahir = $.trim($("#thn_lahir").val());
-		var post_tglLahir = post_thnLahir + "-" + post_blnLahir + "-" + post_tglLhr;
-		var post_captcha = $.trim($("#captcha").val());
-
-		$.ajax({
-			type : 'GET',
-			url : "http://unas.siap-online.dev/denpasar/cari/?k_jenjang=" + post_kJenjang + "&no_ujian=" + post_noujian + "&tgl_lahir=" + post_tglLahir + "&captcha=" + post_captcha + "&callback=?",
-			async : false,
-			// jsonpCallback : '',
-			contentType : "application/json",
-			dataType : 'jsonp',
-			success : function (data) {
-				//on error
-				if (data.code == 99999 && data.message) {
-					$( "#error-msg p").empty();
-					$( "#error-msg p").html(data.message);
-					$( "#error-msg" ).popup( "open" )
-
-				} else {
-					$.mobile.changePage($('#page_hasilCari'), {transition : "slide"});
-					$('#list_hasil').empty();
-					//array 0 = biodata siswa
-					
-					$.each(data[0][1], function(key, value){
-						$('#list_hasil').append('<div data-role="collapsible" data-theme="b" data-content-theme="d" data-inset="false">'+'<ul class="ui-listview ui-listview-inset ui-corner-all ui-shadow" data-inset="true" data-role="listview">'+'<li class="ui-li ui-li-divider ui-bar-b ui-li-has-count ui-first-child" data-role="list-divider" role="heading">'+ value[0] +'</li>'+ '<li class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-c" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="c">' + '<div class="ui-btn-inner ui-li">' + '<div class="ui-btn-text">' + '<p>' + value[1] + '</p>'+'</div>'+'</div>'+'</li>'+'</ul>'+'</div>');
-						//$('#list_hasil').append('<div data-role="collapsible" data-theme="b" data-content-theme="d" data-inset="false">'+'<h3>'+'Biodata Siswa'+'</h3>'+'<ul data-role="listview">'+'<li>'+'1'+'</li>'+'</ul>'+'</div>');
-					});
-					//array 1 =
-					$.each(data[1][1], function(key, value){
-						$('#list_hasil').append('<div data-role="collapsible" data-theme="b" data-content-theme="d" data-inset="false">'+'<ul class="ui-listview ui-listview-inset ui-corner-all ui-shadow" data-inset="true" data-role="listview">'+'<li class="ui-li ui-li-divider ui-bar-b ui-li-has-count ui-first-child" data-role="list-divider" role="heading">'+ value[0] +'</li>'+ '<li class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-c" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="c">' + '<div class="ui-btn-inner ui-li">' + '<div class="ui-btn-text">' + '<p>' + value[1] + '</p>'+'</div>'+'</div>'+'</li>'+'</ul>'+'</div>');
-						//$('#list_hasil').append('<div data-role="collapsible" data-theme="b" data-content-theme="d" data-inset="false">'+'<h3>'+'Nilai Ujian Nasional'+'</h3>'+'<ul data-role="listview">'+'<li>'+'1'+'</li>'+'</ul>'+'</div>');
-					});
-					//array 2 =
-					$.each(data[2][1], function(key, value){
-						$('#list_hasil').append('<div data-role="collapsible" data-theme="b" data-content-theme="d" data-inset="false">'+'<ul class="ui-listview ui-listview-inset ui-corner-all ui-shadow" data-inset="true" data-role="listview">'+'<li class="ui-li ui-li-divider ui-bar-b ui-li-has-count ui-first-child" data-role="list-divider" role="heading">'+ value[0] +'</li>'+ '<li class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-c" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="c">' + '<div class="ui-btn-inner ui-li">' + '<div class="ui-btn-text">' + '<p>' + value[1] + '</p>'+'</div>'+'</div>'+'</li>'+'</ul>'+'</div>');
-						//$('#list_hasil').append('<div data-role="collapsible" data-theme="b" data-content-theme="d" data-inset="false">'+'<h3>'+'Nilai Ujian Sekolah'+'</h3>'+'<ul data-role="listview">'+'<li>'+'1'+'</li>'+'</ul>'+'</div>');
-					});
-					//array 3 =
-					$.each(data[3][1], function(key, value){
-						$('#list_hasil').append('<div data-role="collapsible" data-theme="b" data-content-theme="d" data-inset="false">'+'<ul class="ui-listview ui-listview-inset ui-corner-all ui-shadow" data-inset="true" data-role="listview">'+'<li class="ui-li ui-li-divider ui-bar-b ui-li-has-count ui-first-child" data-role="list-divider" role="heading">'+ value[0] +'</li>'+ '<li class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-c" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="c">' + '<div class="ui-btn-inner ui-li">' + '<div class="ui-btn-text">' + '<p>' + value[1] + '</p>'+'</div>'+'</div>'+'</li>'+'</ul>'+'</div>');
-						//$('#list_hasil').append('<div data-role="collapsible" data-theme="b" data-content-theme="d" data-inset="false">'+'<h3>'+'Status Kelulusan'+'</h3>'+'<ul data-role="listview">'+'<li>'+'1'+'</li>'+'</ul>'+'</div>');
-					});
-				}
-			},
-			error : function(e) {
-				console.log(e.message);
-			}
-		});
-
-	});
-});
-
-			</script>
+			
          </div>
          <div data-role="footer" data-position="fixed" data-theme="b">
             <div data-role="navbar">
@@ -234,81 +176,7 @@
 		  <ul id="result-listview" class="listview" data-role="listview" data-theme="b">
 		  
 		  </ul>
-   <script type="text/javascript">
-	function changePage(id) {
-		$.mobile.changePage($(id), {transition : "slide"});
-	}
-	
-				(function($) {
-					var url = 'http://unas.siap-online.dev/denpasar/berita/?callback=?';
-
-					$.ajax({
-						type : 'GET',
-						url : url,
-						async : false,
-						jsonpCallback : 'jsonCallbackk',
-						contentType : "application/json",
-						dataType : 'jsonp',
-						success : function berita(data2) {
-							 var beritaData = data2.berita;
-
-      
-
-	    $.each(beritaData, function(index, berita) {
-			//console.log(berita);
-
-		    $('#result-listview').append(
-		      '<li>'  +
-		        '<a href="" onclick="changePage(id_' + index + ');">' +
-					'<h3>' + berita.judul + '</h3>' +
-				'</a>' +
-		      '</li>'
-		    );
-
-		    /*
-				Here we are dynamically creating a new page.
-				When a list item is clicked, this is what is actually shown.
-				Do not forget to append this block of code
-				to the body tag. If appended mistakenly somewhere else,
-				the code wont work.
-		    */
-		   var content  = 	'<div data-role="page" id="id_' + index + '" data-url="id_' + index + '">' +
-							'<div data-role="header" data-position="fixed" data-theme="b">' +
-							'<a href="#" data-rel="back" data-icon="back">Back</a>' + '<a data-role="button" class="ui-btn-right" id="bt_share" href="#page_share" data-rel="dialog" data-transition="pop" data-icon="gear" data-iconpos="notext"></a>' +
-							  '<h1>' + berita.judul + '</h1>' +
-							'</div>' +
-							'<div data-role="content">' +
-							  '<p>' + 
-							    '<div data-role="fieldcontain" class="result">'+ '<font color="blue">' + 'Di Postkan Pada:   ' + berita.wkt_tayang + '</font>' +'<br/>' + berita.content 
-							    '</div>' +
-							  '</p>' +
-							'</div>' +
-							
-					    '</div>';
-						
-						
-
-			$('body').append(content);
-
-			/*Tell JQM to enhance the page with the required classes.*/
-			$(index).page();
-
-        });	// end for each
-		
-	  	$('#result-listview').listview('refresh');
-      //}
-	  
-    
-						},
-						error : function(e) {
-							console.log(e.message);
-						}
-					});
-
-					
-				})(jQuery);
-
-            </script>
+   
             
 			
             <div data-role="footer" data-position="fixed" data-theme="b">
@@ -367,40 +235,7 @@
             <div class="div-widget" id="div_pesan">
                <ul data-role="listview" id="list_pesan" data-inset="true"></ul>
             </div>
-            <script type="text/javascript">
-				(function($) {
-					var url = 'http://unas.siap-online.dev/denpasar/pesan/?callback=?';
-
-					$.ajax({
-						type : 'GET',
-						url : url,
-						async : false,
-						jsonpCallback : 'jsonCallback',
-						contentType : "application/json",
-						dataType : 'jsonp',
-						success : function pesan(data) {
-							var list = '';
-							data = data.pesan;
-							var len = data.length;
-							for (var i = 0; i < len; i++) {
-
-								var pesan = data[i];
-								//list += '<ul class="ui-listview ui-listview-inset ui-corner-all ui-shadow" data-inset="true" data-role="listview">'+'<li class="ui-li ui-li-divider ui-bar-b ui-li-has-count ui-first-child" data-role="list-divider" role="heading">'+ pesan.nama + ' ' +'||' + ' ' + pesan.email  + '</li>'+ '<li>' + '<div data-role="fieldcontain" class="result">' + '<p>' + pesan.content + '</p>'+'</div>'+'</li>' + '<div data-role="fieldcontain" class="result2" data-theme="b">' + 'Jawaban : ' + '</div>' + '</ul>';
-								list +='<div data-role="header" data-theme="c">'+'<ul data-role="listview" data-inset="true">'+'<li data-role="list-divider">'+'<h2>'+pesan.nama+'</h2>'+'<p>'+pesan.email+'</p>'+'<strong>'+pesan.content+'</strong>'+'<p class="ui-li-aside">'+'<strong>'+pesan.wkt_kirim+'</strong>'+'</p>'+'</li>'+'<li data-theme="c">'+'<h2>'+'Jawaban : '+'</h2>'+'<p>'+'<strong>'+'</strong>'+'</p>'+pesan.jawab+'</p>'+'</li>'+'</ul>'+'</div>';
-    
-							}
-
-							$('#list_pesan').append(list);
-							//$('#list_pesan').listview('refresh');
-						},
-						error : function(e) {
-							console.log(e.message);
-						}
-					});
-
-				})(jQuery);
-
-            </script>
+          
          </div>
          <div data-role="footer" data-position="fixed" data-theme="b">
             <div data-role="navbar">
@@ -466,50 +301,7 @@
                      </div>
                   </div>
                </form>
-               <script type="text/javascript">
-		$(document).ready(function() {
-		   $( "#error-msg" ).popup();
-			$('#pesan-send').click(function(e) {
-				e.preventDefault();
-
-				// Post string
-				var post_pnama = $.trim($("#pesan[nama]").val());
-				var post_pemail = $.trim($("#pesan[email]").val());
-				var post_pjudul = $.trim($("#pesan[judul]").val());
-				var post_pcontent = $.trim($("#pesan[content]").val());
-				var post_pistampil = $.trim($("#pesan[is_tampil]").val());
-				var post_piskirim =$.trim($("#pesan[is_kirim]").val());
-				var post_captcha = $.trim($("#captcha").val());
-
-				$.ajax({
-					type : 'POST',
-					url : "http://unas.siap-online.dev/denpasar/pesan/insert/?pesan[nama]=" + post_pnama + "&pesan[email]=" + post_pemail + "&pesan[judul]=" + post_pjudul + "&pesan[content]=" + post_pcontent + "&pesan[is_tampil]=" + post_pistampil + "&pesan[is_kirim]=" + post_piskirim + "&captcha=" + post_captcha + "&callback=?",
-					async : false,
-					// jsonpCallback : '',
-					contentType : "application/json",
-					dataType : 'jsonp',
-					success : function(data) {
-						//on error
-						if (data.code == 99999 && data.message) {
-							$("#error-msg p").empty();
-							$("#error-msg p").html(data.message);
-							$("#error-msg").popup("open")
-
-						} else {
-							$.mobile.changePage($('#page_pesan'), {
-								transition : "slide"
-							});
-						}
-					},
-					error : function(e) {
-						console.log(e.message);
-					}
-				});
-
-			});
-		});
-      </script>
-
+               
             </div>
 
          </div>
