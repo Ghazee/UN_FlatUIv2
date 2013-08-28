@@ -38,11 +38,11 @@ function changePage(id) {
 		   var content  = 	'<div data-role="page" id="id_' + index + '" data-url="id_' + index + '">' +
 							'<div data-role="header" data-position="fixed" data-theme="b">' +
 							'<a href="#" data-rel="back" data-icon="back">Back</a>' + '<a data-role="button" class="ui-btn-right" id="bt_share" href="#page_share" data-rel="dialog" data-transition="pop" data-icon="gear" data-iconpos="notext"></a>' +
-							  '<h1>' + berita.judul + '</h1>' +
+							  '<h1>' + 'DETAIL BERITA' + '</h1>' +
 							'</div>' +
 							'<div data-role="content">' +
 							  '<p>' + 
-							    '<div data-role="fieldcontain" class="result">'+ '<font color="blue">' + 'Di Postkan Pada:   ' + berita.wkt_tayang + '</font>' +'<br/>' + berita.content 
+							    '<div data-role="fieldcontain" class="result">'+ '<font color="blue">' + 'Posted by Admin, Pada:   ' + berita.wkt_tayang + '</font>' +'<br/>'+'<h1>' + berita.judul +'</h1>'+'<br/>' + berita.content 
 							    '</div>' +
 							  '</p>' +
 							'</div>' +
