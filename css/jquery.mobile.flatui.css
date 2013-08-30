@@ -2936,9 +2936,9 @@ div.ui-slider-switch.ui-mini {
 .ui-panel-animate.ui-panel-content-wrap-position-right.ui-panel-content-wrap-open.ui-panel-content-wrap-display-push {
 	left: 0;
 	right: 0;
-	-webkit-transform: translate3d(-17em,0,0);
-	-moz-transform: translate3d(-17em,0,0);
-	transform: translate3d(-17em,0,0);
+	-webkit-transform: translate3d(0,0,0);
+	-moz-transform: translate3d(0,0,0);
+	transform: translate3d(0,0,0);
 }
 /* negate "panel left/right open" for overlay */
 .ui-panel-content-fixed-toolbar-open.ui-panel-content-fixed-toolbar-display-overlay,
@@ -3014,4 +3014,10 @@ div.ui-slider-switch.ui-mini {
  -webkit-transform: translateZ(0);
  -webkit-perspective:1000;
  -webkit-backface-visibility: hidden;
+ }
+ .ui-panel .ui-listview { 
+ 	-webkit-transform: translate3d(0,0,0); 
+ }
+ .ui-panel .ui-listview .ui-btn { 
+ 	-webkit-transform: translate3d(0,0,0); 
  }
